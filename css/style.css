@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 100vw;
+    padding-inline: 10px;
+  }
+}
+
+/* Styles login form */
+#loginForm > button[type="button"] > img {
+  transform: rotate(90deg);
+}
+
+/* logo */
+.logo {
+  font-size: 35px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.logo > span {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+/* mainWrap */
+#mainWrap > section h1 {
+  font-size: 24px;
+}
+
+/* style select employee for admin*/
+#select-wrapper-137078 {
+  width: 50vw !important;
+}

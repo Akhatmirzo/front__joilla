@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joilla Marketplace || Akhatmirzo Umarov</title>
+    <!-- Tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {},
+          screens: {
+            xl: { max: "1279px" },
+            // => @media (max-width: 1279px) { ... }
+
+            lg: { max: "1023px" },
+            // => @media (max-width: 1023px) { ... }
+
+            md: { max: "767px" },
+            // => @media (max-width: 767px) { ... }
+
+            sm: { max: "375px" },
+            // => @media (max-width: 639px) { ... }
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <h1 class="text-3xl text-center">Joilla Market</h1>
+
+    <div class="flex items-center justify-center gap-3 mt-5">
+      <a class="bg-yellow-400 p-3 rounded-xl" href="./pages/auth.html">Login</a>
+      <a class="bg-yellow-400 p-3 rounded-xl" href="./admin/adminAuth.html"
+        >Admin</a
+      >
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

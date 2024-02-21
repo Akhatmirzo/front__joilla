@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <!-- Tw-Element -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          screens: {
+            xl: { max: "1279px" },
+            // => @media (max-width: 1279px) { ... }
+
+            lg: { max: "1023px" },
+            // => @media (max-width: 1023px) { ... }
+
+            md: { max: "767px" },
+            // => @media (max-width: 767px) { ... }
+
+            sm: { max: "540px" },
+            // => @media (max-width: 540px) { ... }
+          },
+          extend: {},
+        },
+        corePlugins: {
+          preflight: false,
+        },
+      };
+    </script>
+
+    <!-- ----- -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body class="flex">
+    <header class="min-w-[250px] z-[10000]">
+      <div class="container p-0 flex flex-col gap-10">
+        <a href="#" class="logo px-5 py-8">Joilla <span>Market</span></a>
+
+        <ul class="navbar__list flex flex-col relative">
+          <li
+            class="w-full bg-[#eee] px-5 py-3 transition-all rounded-s-full absolute top-[0] z-[1]"
+          >
+            <span class="opacity-0">Hidden</span>
+          </li>
+          <li value="0" class="w-full px-5 py-3 z-[10] cursor-pointer">Home</li>
+          <li value="1" class="w-full px-5 py-3 z-[10] cursor-pointer">
+            Employers
+          </li>
+          <li value="2" class="w-full px-5 py-3 z-[10] cursor-pointer">
+            Employees
+          </li>
+          <li
+            onclick="signOut()"
+            class="w-full px-5 py-3 z-[10] cursor-pointer"
+          >
+            SignOut
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="mainWrap" class="bg-[#eee] w-full h-screen overflow-x-hidden">
+      <!-- Home section -->
+      <section class="home p-5">
+        <h1>Home section</h1>
+      </section>
+      <!--End of Home section -->
+
+      <!-- employers section -->
+      <section class="employers p-5">
+        <div class="flex items-center justify-between">
+          <h1>Employer</h1>
+
+          <div class="relative bg-[#eee]" x-data="{ open: false }">
+            <button
+              @click="open = true"
+              class="rounded-lg bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-500 hover:bg-blue-100 hover:text-blue-600"
+            >
+              Employer Register
+            </button>
+            <div
+              x-show="open"
+              x-transition:enter="ease-out duration-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="ease-in duration-200"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+              x-description="Background backdrop, show/hide based on modal state."
+              class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity z-[1000]"
+            ></div>
+
+            <div
+              class="fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-[1002]"
+            >
+              <div
+                class="flex min-h-full items-end justify-center text-center sm:items-center sm:p-0"
+              >
+                <div
+                  x-show="open"
+                  x-transition:enter="ease-out duration-300"
+                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave="ease-in duration-200"
+                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-description="Modal panel, show/hide based on modal state."
+                  class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                  @click.away="open = false"
+                >
+                  <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                    <form
+                      class="w-[500px] md:w-[300px] flex flex-col gap-3"
+                      id="employerForm"
+                    >
+                      <input
+                        type="text"
+                        required
+                        placeholder="Fullname"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Phone number"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="password"
+                        required
+                        placeholder="Password"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+
+                      <div class="flex gap-3">
+                        <button
+                          @click="open = false"
+                          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          Register
+                        </button>
+                        <button
+                          @click="open = false"
+                          type="button"
+                          class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="block w-full overflow-x-auto">
+          <table class="items-center bg-transparent w-full border-collapse">
+            <thead class="px-6">
+              <tr>
+                <th
+                  class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Fullname
+                </th>
+                <th
+                  class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Phone number
+                </th>
+                <th
+                  class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Balance
+                </th>
+                <th
+                  class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Options
+                </th>
+              </tr>
+            </thead>
+
+            <tbody id="employerTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Edit Modal -->
+        <div
+          id="employerEditModal"
+          class="hidden items-center justify-center w-full h-screen fixed top-1/2 left-1/2 bg-gray-600 bg-opacity-75 translate-y-[-50%] translate-x-[-50%] z-[10000000000000]"
+        >
+          <div class="bg-white p-5">
+            <h1>Edit Employer</h1>
+            <form
+              id="editEmployerForm"
+              class="w-[500px] md:w-[300px] flex flex-col gap-3"
+            >
+              <input
+                type="text"
+                required
+                placeholder="Fullname"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="tel"
+                required
+                placeholder="Phone number"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <!-- <input
+                type="password"
+                required
+                placeholder="Enter your password"
+                class="w-full border-2 pl-[5px] py-2"
+              /> -->
+
+              <div class="flex items-center">
+                <button
+                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="closeEmployerEditModal()"
+                  class="w-full text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!--End of employers section -->
+
+      <!-- employees section -->
+      <section class="employees p-5">
+        <h1>employees section</h1>
+      </section>
+      <!--End of employees section -->
+    </main>
+
+    <!-- Admin Helper Navbar -->
+    <script src="../Helper/navbar.js"></script>
+    <!-- Helper js -->
+    <script src="../Helper/helper.js"></script>
+    <!-- Admin Dashboard js -->
+    <script src="../admin/adminJs/adminDashboard.js"></script>
+    <!-- Employer js -->
+    <script src="../admin/adminJs/employer.js"></script>
+  </body>
+</html>
