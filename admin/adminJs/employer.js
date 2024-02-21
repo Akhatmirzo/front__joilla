@@ -246,7 +246,8 @@ async function employerEdit(id) {
 
     console.log(editObj);
 
-    putOneEmployer(id, editObj)
+    await putOneEmployer(id, editObj);
+    closeEmployerEditModal();
   });
 }
 

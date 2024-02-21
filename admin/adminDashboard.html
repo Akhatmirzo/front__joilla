@@ -253,11 +253,65 @@
 
       <!-- employees section -->
       <section class="employees p-5">
-        <h1>employees section</h1>
+        <div class="flex items-center justify-between gap-5">
+          <h1>Employee</h1>
+
+          <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
+          <div class="w-[60%]">
+            <select
+              id="employerSelect"
+              class="text-black"
+              data-te-select-init
+              data-te-select-filter="true"
+              onchange="renderEmplAdminSelect()"
+            >
+              <option value=".">Select Employer</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Employee table -->
+        <div
+          id="emplForEmployer"
+          class="w-full min-h-[500px] border-2 border-gray-400 mt-5 p-3"
+        >
+          <div class="block w-full">
+            <table class="items-center bg-transparent w-full border-collapse">
+              <thead class="px-6">
+                <tr>
+                  <th
+                    class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  >
+                    Fullname
+                  </th>
+                  <th
+                    class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  >
+                    Phone number
+                  </th>
+                  <th
+                    class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  >
+                    Balance
+                  </th>
+                  <th
+                    class="bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  >
+                    Options
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody id="employeeTable" class="relative"></tbody>
+            </table>
+          </div>
+        </div>
       </section>
       <!--End of employees section -->
     </main>
 
+    <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
     <!-- Admin Helper Navbar -->
     <script src="../Helper/navbar.js"></script>
     <!-- Helper js -->
@@ -266,5 +320,7 @@
     <script src="../admin/adminJs/adminDashboard.js"></script>
     <!-- Employer js -->
     <script src="../admin/adminJs/employer.js"></script>
+    <!-- Employee js -->
+    <script src="./adminJs/employee.js"></script>
   </body>
 </html>
