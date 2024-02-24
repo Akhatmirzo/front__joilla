@@ -1,5 +1,5 @@
 // Get All Employees for administration
-async function adminGetAllEmployees(employer) {
+async function getAllEmployees(employer) {
   try {
     const response = await fetch(`${api}employee/`, {
       headers: {
@@ -11,8 +11,35 @@ async function adminGetAllEmployees(employer) {
 
     const res = await response.json();
 
-    return res;
+    if (!response.ok) {
+      throw new Error(res.error || response.statusText);
+    }
 
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Register Employee
+async function registerEmployee(employee) {
+  try {
+    const response = await fetch(`${api}employee`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token.token,
+      },
+      body: JSON.stringify(employee),
+    });
+
+    const res = await response.json();
+
+    if (!response.ok) {
+      throw new Error(res.error || response.statusText);
+    }
+
+    return res;
   } catch (error) {
     console.log(error);
   }
@@ -21,17 +48,16 @@ async function adminGetAllEmployees(employer) {
 // Get One Employee
 async function getOneEmployee(id) {
   try {
-    const response = await fetch(`${api}employee${id}`,{
+    const response = await fetch(`${api}employee${id}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: token.token,
       },
-    })
+    });
 
     const res = await response.json();
 
     return res;
-
   } catch (error) {
     console.log(error);
   }
@@ -51,10 +77,9 @@ async function deleteOneEmployee(id) {
     const res = await response.json();
 
     return res;
-
   } catch (error) {
     console.log(error);
   }
 }
- 
+
 // Edit Employee

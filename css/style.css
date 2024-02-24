@@ -41,3 +41,9 @@
 #select-wrapper-137078 {
   width: 50vw !important;
 }
+
+/* Pagination */
+.active__pagination {
+  color: white !important;
+  background-color: black !important;
+}

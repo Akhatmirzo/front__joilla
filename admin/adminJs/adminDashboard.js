@@ -245,7 +245,7 @@ function employeeRender(data, response) {
 async function renderEmplAdminSelect() {
   const select = employerSelect.value;
   if (select != ".") {
-    const result = await adminGetAllEmployees(select);
+    const result = await getAllEmployees(select);
     employeeRender(result.employees || [], result);
   }
 }

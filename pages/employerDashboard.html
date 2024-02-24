@@ -198,23 +198,437 @@
               </tr>
             </thead>
 
-            <tbody id="employeeTable">
-              
-            </tbody>
+            <tbody id="employeeTable"></tbody>
           </table>
         </div>
       </section>
       <!--End of Employees section -->
 
       <!-- Products section -->
-      <section class="products">
-        <h1>Products section</h1>
+      <section class="products p-5">
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl">Product section</h1>
+
+          <div class="relative bg-[#eee]" x-data="{ open: false }">
+            <button
+              @click="open = true"
+              class="rounded-lg bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-500 hover:bg-blue-100 hover:text-blue-600"
+            >
+              AddProduct
+            </button>
+            <div
+              x-show="open"
+              x-transition:enter="ease-out duration-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="ease-in duration-200"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+              x-description="Background backdrop, show/hide based on modal state."
+              class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity z-[99999999999]"
+            ></div>
+
+            <div
+              class="fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-[999999999999]"
+            >
+              <div
+                class="flex min-h-full items-end justify-center text-center sm:items-center sm:p-0"
+              >
+                <div
+                  x-show="open"
+                  x-transition:enter="ease-out duration-300"
+                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave="ease-in duration-200"
+                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-description="Modal panel, show/hide based on modal state."
+                  class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                  @click.away="open = false"
+                >
+                  <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                    <form
+                      class="w-[500px] md:w-[300px] flex flex-col gap-3"
+                      id="ProductForm"
+                    >
+                      <input
+                        type="text"
+                        required
+                        placeholder="Code"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="text"
+                        required
+                        placeholder="name"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="number"
+                        required
+                        placeholder="QTY"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="number"
+                        required
+                        placeholder="price"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <select
+                        class="w-full border-2 pl-[5px] py-2"
+                        data-te-select-init
+                      >
+                        <option value=".">Select unit</option>
+                        <option value="kg">Kilogramm</option>
+                        <option value="dona">dona</option>
+                        <option value="qadoq">qadoq</option>
+                        <option value="m2">m2</option>
+                      </select>
+
+                      <div class="flex gap-3">
+                        <button
+                          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          AddProduct
+                        </button>
+                        <button
+                          @click="open = false"
+                          type="button"
+                          class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block w-full relative">
+          <table class="bg-transparent w-full border-collapse">
+            <thead class="">
+              <tr>
+                <th
+                  class="border-x-2 text-center w-[35px] bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  T/r
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Code
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Name
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  QTY
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Price / <span>Unit</span>
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Options
+                </th>
+              </tr>
+            </thead>
+
+            <tbody id="productsBody"></tbody>
+          </table>
+          <!-- Pagination -->
+          <nav
+            aria-label="Page navigation example"
+            class="fixed bottom-10 right-5"
+          >
+            <div class="list-style-none flex" id="paginationList">
+              <button
+                type="button"
+                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-[#000] cursor-pointer"
+              >
+                Previous
+              </button>
+              <ul class="flex items-center gap-1">
+                <!-- List pagination items -->
+              </ul>
+              <button
+                type="button"
+                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-[#000] cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Edit Modal -->
+        <div
+          id="productEditModal"
+          class="hidden z-10 items-center justify-center w-full h-screen fixed top-1/2 left-1/2 bg-gray-600 bg-opacity-75 translate-y-[-50%] translate-x-[-50%] z-[10000000000000]"
+        >
+          <div class="bg-white p-5 z-20">
+            <h1>Edit Employer</h1>
+            <form
+              id="editProductForm"
+              class="w-[500px] md:w-[300px] flex flex-col gap-3"
+            >
+              <input
+                type="text"
+                required
+                placeholder="Code"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="text"
+                required
+                placeholder="Name"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="number"
+                required
+                placeholder="QTY"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="number"
+                required
+                placeholder="Price"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <select class="w-full border-2 pl-[5px] py-2" data-te-select-init>
+                <option value=".">Select unit</option>
+                <option value="kg">Kilogramm</option>
+                <option value="dona">dona</option>
+                <option value="qadoq">qadoq</option>
+                <option value="m2">m2</option>
+              </select>
+
+              <div class="flex items-center">
+                <button
+                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="closeProductEditModal()"
+                  class="w-full text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
       <!--End of Products section -->
 
       <!-- Markets section -->
-      <section class="markets">
-        <h1>Markets section</h1>
+      <section class="markets p-5">
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl">Market section</h1>
+
+          <div class="relative bg-[#eee]" x-data="{ open: false }">
+            <button
+              @click="open = true"
+              class="rounded-lg bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-500 hover:bg-blue-100 hover:text-blue-600"
+            >
+              AddMarket
+            </button>
+            <div
+              x-show="open"
+              x-transition:enter="ease-out duration-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="ease-in duration-200"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+              x-description="Background backdrop, show/hide based on modal state."
+              class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity z-[99999999999]"
+            ></div>
+
+            <div
+              class="fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-[999999999999]"
+            >
+              <div
+                class="flex min-h-full items-end justify-center text-center sm:items-center sm:p-0"
+              >
+                <div
+                  x-show="open"
+                  x-transition:enter="ease-out duration-300"
+                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave="ease-in duration-200"
+                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  x-description="Modal panel, show/hide based on modal state."
+                  class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                  @click.away="open = false"
+                >
+                  <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                    <form
+                      class="w-[500px] md:w-[300px] flex flex-col gap-3"
+                      id="MarketForm"
+                    >
+                      <input
+                        type="text"
+                        required
+                        placeholder="Market_name"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Phone number"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+                      <input
+                        type="text"
+                        required
+                        placeholder="Location"
+                        class="w-full border-2 pl-[5px] py-2"
+                      />
+
+                      <div class="flex gap-3">
+                        <button
+                          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          AddMarket
+                        </button>
+                        <button
+                          @click="open = false"
+                          type="button"
+                          class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block w-full relative">
+          <table class="bg-transparent w-full border-collapse">
+            <thead class="">
+              <tr>
+                <th
+                  class="border-x-2 text-center w-[35px] bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  T/r
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Name
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Phone Number
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Location
+                </th>
+                <th
+                  class="border-x-2 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Options
+                </th>
+              </tr>
+            </thead>
+
+            <tbody id="marketsBody"></tbody>
+          </table>
+          <!-- Pagination -->
+          <nav
+            aria-label="Page navigation example"
+            class="fixed bottom-10 right-5"
+          >
+            <div class="list-style-none flex" id="paginationMarketList">
+              <button
+                type="button"
+                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-[#000] cursor-pointer"
+              >
+                Previous
+              </button>
+              <ul class="flex items-center gap-1">
+                <!-- List pagination items -->
+              </ul>
+              <button
+                type="button"
+                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-[#000] cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Edit Modal -->
+        <div
+          id="marketEditModal"
+          class="hidden z-10 items-center justify-center w-full h-screen fixed top-1/2 left-1/2 bg-gray-600 bg-opacity-75 translate-y-[-50%] translate-x-[-50%] z-[10000000000000]"
+        >
+          <div class="bg-white p-5 z-20">
+            <h1>Edit Employer</h1>
+            <form
+              id="editMarketForm"
+              class="w-[500px] md:w-[300px] flex flex-col gap-3"
+            >
+              <input
+                type="text"
+                required
+                placeholder="Market_name"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="tel"
+                required
+                placeholder="Phone number"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+              <input
+                type="text"
+                required
+                placeholder="Location"
+                class="w-full border-2 pl-[5px] py-2"
+              />
+
+              <div class="flex items-center">
+                <button
+                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="closeMarketEditModal()"
+                  class="w-full text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
       <!--End of Markets section -->
 
@@ -242,7 +656,11 @@
     <!-- Employee Helper js -->
     <script src="../Helper/helper.js"></script>
     <!-- Employee -->
-    <script src="../js/employer/employee.js"></script>
+    <script src="../Helper/employee.js"></script>
+    <!-- Product js -->
+    <script src="../Helper/product.js"></script>
+    <!-- Market js -->
+    <script src="../Helper/market.js"></script>
     <!-- Employee Dashboard js -->
     <script src="../js/employer/employerDash.js"></script>
   </body>

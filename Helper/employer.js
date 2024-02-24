@@ -1,4 +1,4 @@
-const token = JSON.parse(localStorage.getItem("token"));
+
 
 // Register Employer
 async function registerEmployer(reqBody) {
