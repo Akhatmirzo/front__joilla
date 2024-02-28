@@ -33,15 +33,14 @@ const api = "https://joilla-market.onrender.com/api/v1/";
 
 // ! ----------------------------------------------------------------Render----------------------------------------------------------------
 // Render paginations Product
-let page = localStorage.getItem("page") || localStorage.setItem("page", 1);
+let page = localStorage.getItem("page") || 1;
 let pageMarket =
-  localStorage.getItem("pageMarket") || localStorage.setItem("pageMarket", 1);
+  localStorage.getItem("pageMarket") || 1;
 
-function pagination(data, type = "paginationList") {
-  let isLocalStorePage = type == "paginationList" ? "page" : "pageMarket";
-  page = localStorage.getItem(`${isLocalStorePage}`);
+function pagination(data) {
+  page = localStorage.getItem("page");
 
-  const pagination = document.getElementById(type);
+  const pagination = document.getElementById("paginationList");
   let isActivePage = false;
   let allProPages = Math.ceil(data.all / 10);
   let isPage = allProPages == data.page;
@@ -52,7 +51,7 @@ function pagination(data, type = "paginationList") {
   } else if (data.page > 1) {
     pagination.children[0].style.opacity = 1;
     pagination.children[0].removeAttribute("disabled");
-    pagination.children[0].setAttribute("onclick", `prevBtn()`);
+    pagination.children[0].setAttribute("onclick", `prevBtn(${page})`);
   }
 
   if (isPage) {
@@ -61,7 +60,7 @@ function pagination(data, type = "paginationList") {
   } else {
     pagination.children[2].style.opacity = 1;
     pagination.children[2].removeAttribute("disabled");
-    pagination.children[2].setAttribute("onclick", `nextBtn()`);
+    pagination.children[2].setAttribute("onclick", `nextBtn(${page})`);
   }
 
   if (allProPages > 3) {
@@ -111,11 +110,10 @@ function pagination(data, type = "paginationList") {
     }
   }
 }
-function paginationMarket(data, type = "paginationList") {
-  let isLocalStorePage = type == "paginationList" ? "page" : "pageMarket";
-  page = localStorage.getItem(`${isLocalStorePage}`);
+function paginationMarket(data) {
+  page = localStorage.getItem(`pageMarket`);
 
-  const pagination = document.getElementById(type);
+  const pagination = document.getElementById("paginationMarketList");
   let isActivePage = false;
   let allProPages = Math.ceil(data.all / 10);
   let isPage = allProPages == data.page;
@@ -126,7 +124,7 @@ function paginationMarket(data, type = "paginationList") {
   } else if (data.page > 1) {
     pagination.children[0].style.opacity = 1;
     pagination.children[0].removeAttribute("disabled");
-    pagination.children[0].setAttribute("onclick", `marketprevBtn()`);
+    pagination.children[0].setAttribute("onclick", `marketprevBtn(${page})`);
   }
 
   if (isPage) {
@@ -135,7 +133,7 @@ function paginationMarket(data, type = "paginationList") {
   } else {
     pagination.children[2].style.opacity = 1;
     pagination.children[2].removeAttribute("disabled");
-    pagination.children[2].setAttribute("onclick", `marketnextBtn()`);
+    pagination.children[2].setAttribute("onclick", `marketnextBtn(${page})`);
   }
 
   if (allProPages > 3) {
@@ -186,19 +184,19 @@ function paginationMarket(data, type = "paginationList") {
   }
 }
 
-function prevBtn() {
-  renderProductPaginations(Number(page) - 1);
+function prevBtn(prev) {
+  renderProductPaginations(Number(prev) - 1);
 }
 
-function nextBtn() {
-  renderProductPaginations(Number(page) + 1);
+function nextBtn(next) {
+  renderProductPaginations(Number(next) + 1);
 }
-function marketprevBtn() {
-  renderProductPaginations(Number(pageMarket) - 1);
+function marketprevBtn(prev) {
+  renderMarketPaginations(Number(prev) - 1);
 }
 
-function marketnextBtn() {
-  renderProductPaginations(Number(pageMarket) + 1);
+function marketnextBtn(next) {
+  renderMarketPaginations(Number(next) + 1);
 }
 
 // Loading

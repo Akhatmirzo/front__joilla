@@ -262,7 +262,7 @@ async function renderMarketPaginations(page) {
     }
 
     localStorage.setItem("pageMarket", page);
-    paginationMarket(result, "paginationMarketList");
+    paginationMarket(result);
   } catch (err) {
     console.log(err);
   }
